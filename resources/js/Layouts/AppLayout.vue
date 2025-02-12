@@ -1,26 +1,13 @@
 <script setup>
-import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
-import ApplicationMark from '@/Components/ApplicationMark.vue';
 import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
-import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 
 defineProps({
     title: String,
 });
-
-const showingNavigationDropdown = ref(false);
-
-const switchToTeam = (team) => {
-    router.put(route('current-team.update'), {
-        team_id: team.id,
-    }, {
-        preserveState: false,
-    });
-};
 
 const logout = () => {
     router.post(route('logout'));
@@ -40,8 +27,8 @@ const logout = () => {
                 <div class="h-full pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                     <ul class="space-y-2 font-medium">
                         <li>
-                            <NavLink class="w-full" :href="route('dashboard')" :active="route().current('dashboard')">
-                                Dashboard
+                            <NavLink class="w-full" :href="route('home')" :active="route().current('home')">
+                                Home
                             </NavLink>
                             <NavLink class="w-full" :href="route('admin.vehicle.create')" :active="route().current('admin.vehicle.create')">
                                 Add New Vehicle
