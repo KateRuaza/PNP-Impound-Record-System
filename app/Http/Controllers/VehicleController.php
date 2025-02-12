@@ -60,6 +60,21 @@ class VehicleController extends Controller
         //
     }
 
+    public function updateStatus(string $id, string $status)
+    {
+        $validStatus = ['suspended', 'released'];
+
+        if (!in_array($status, $validStatus)) {
+            return redirect()->back();
+        }
+
+        $vehicle = Vehicle::findOrFail($id);
+
+        $vehicle->status = $status;
+
+        $vehicle->save();
+    }
+
     /**
      * Remove the specified resource from storage.
      */
