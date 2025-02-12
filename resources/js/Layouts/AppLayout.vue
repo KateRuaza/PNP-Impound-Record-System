@@ -34,7 +34,7 @@ const links = ref([
                 <div class="h-full pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                     <ul class="space-y-2 font-medium">
                         <li>
-                            <NavLink v-for="(link, index) in links" :key="index" class="w-full" :href="route(link.route)" :active="route().current(link.route)">
+                            <NavLink v-for="(link, index) in links" :key="index" class="w-full" :href="route(link.route)" :active="route().current(link.route)" prefetch cache-for="1m">
                                 {{ link.label }}
                             </NavLink>
                         </li>
