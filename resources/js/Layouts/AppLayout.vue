@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import Banner from '@/Components/Banner.vue';
 import Dropdown from '@/Components/Dropdown.vue';
@@ -12,6 +13,12 @@ defineProps({
 const logout = () => {
     router.post(route('logout'));
 };
+
+const links = ref([
+    { label: 'Home', route: 'home' },
+    { label: 'Add New Vehicle', route: 'admin.vehicles.create' },
+    { label: 'Impound Record', route: 'admin.vehicles.index' },
+]);
 </script>
 
 <template>
@@ -27,14 +34,8 @@ const logout = () => {
                 <div class="h-full pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                     <ul class="space-y-2 font-medium">
                         <li>
-                            <NavLink class="w-full" :href="route('home')" :active="route().current('home')">
-                                Home
-                            </NavLink>
-                            <NavLink class="w-full" :href="route('admin.vehicle.create')" :active="route().current('admin.vehicle.create')">
-                                Add New Vehicle
-                            </NavLink>
-                            <NavLink class="w-full" :href="route('admin.vehicle.index')" :active="route().current('admin.vehicle.index')">
-                                Impound Record
+                            <NavLink v-for="(link, index) in links" :key="index" class="w-full" :href="route(link.route)" :active="route().current(link.route)">
+                                {{ link.label }}
                             </NavLink>
                         </li>
                     </ul>

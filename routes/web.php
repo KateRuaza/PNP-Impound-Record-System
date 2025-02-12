@@ -31,7 +31,7 @@ Route::middleware([
         'prefix' => 'admin',
         'as' => 'admin.',
     ], function () {
-        Route::resource('/vehicle', VehicleController::class);
-        Route::put('/vehicle/{id}/{status}', [VehicleController::class, 'updateStatus'])->name('vehicle.update-status');
+        Route::resource('/vehicles', VehicleController::class);
+        Route::put('/vehicles/{id}/{status}', [VehicleController::class, 'updateStatus'])->name('vehicles.update-status');
     });
 });

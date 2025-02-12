@@ -30,7 +30,7 @@ const handleAction = (status) => {
     if (!selectedVehicle.value) return;
 
     form.put(
-        route('admin.vehicle.update-status', {
+        route('admin.vehicles.update-status', {
             id: selectedVehicle.value.id,
             status: status
         }),

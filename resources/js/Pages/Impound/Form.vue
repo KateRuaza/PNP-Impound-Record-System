@@ -25,7 +25,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('admin.vehicle.store'), {
+    form.post(route('admin.vehicles.store'), {
         onSuccess: () => {
             form.reset();
             alert('Vehicle Added!');
