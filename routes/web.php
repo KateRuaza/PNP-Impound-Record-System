@@ -28,5 +28,6 @@ Route::middleware([
         'as' => 'admin.',
     ], function () {
         Route::resource('/vehicle', VehicleController::class);
+        Route::put('/vehicle/{id}/{status}', [VehicleController::class, 'updateStatus'])->name('vehicle.update-status');
     });
 });
