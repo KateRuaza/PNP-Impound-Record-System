@@ -14,7 +14,9 @@ class VehicleController extends Controller
      */
     public function index()
     {
-        //
+        $vehicles = Vehicle::all();
+
+        return inertia('Impound/Record', compact('vehicles'));
     }
 
     public function create()
