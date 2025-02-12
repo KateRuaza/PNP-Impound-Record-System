@@ -133,11 +133,10 @@ const activeTab = ref('owner');
                                     </div>
                                 </div>
                             </div>
-                            <div class="mt-6 text-center">
+                            <div class="mt-6 text-end">
                                 <PrimaryButton type="submit">Submit</PrimaryButton>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>
