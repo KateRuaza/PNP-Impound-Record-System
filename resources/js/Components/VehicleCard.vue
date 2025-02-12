@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-	<div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md">
+	<div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md cursor-pointer">
 	    <div>
 	        <img :src="'/files/' + vehicle.image" :alt="'Vehicle ' + vehicle.id" class="w-full object-cover rounded-md" style="height: 200px;">
 
