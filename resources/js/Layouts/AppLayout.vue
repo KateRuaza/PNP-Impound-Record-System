@@ -46,6 +46,9 @@ const logout = () => {
                             <NavLink class="w-full" :href="route('admin.vehicle.create')" :active="route().current('admin.vehicle.create')">
                                 Add New Vehicle
                             </NavLink>
+                            <NavLink class="w-full" :href="route('admin.vehicle.index')" :active="route().current('admin.vehicle.index')">
+                                Impound Record
+                            </NavLink>
                         </li>
                     </ul>
                 </div>
