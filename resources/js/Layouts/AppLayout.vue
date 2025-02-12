@@ -43,6 +43,9 @@ const logout = () => {
                             <NavLink class="w-full" :href="route('dashboard')" :active="route().current('dashboard')">
                                 Dashboard
                             </NavLink>
+                            <NavLink class="w-full" :href="route('admin.vehicle.create')" :active="route().current('admin.vehicle.create')">
+                                Add New Vehicle
+                            </NavLink>
                         </li>
                     </ul>
                 </div>
