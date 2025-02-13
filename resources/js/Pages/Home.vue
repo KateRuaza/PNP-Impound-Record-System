@@ -1,5 +1,10 @@
 <script setup>
 import AppLayout from '@/Layouts/AppLayout.vue';
+const props = defineProps({
+    vehicleCounts: Object,
+    typeCounts: Object,
+});
+
 </script>
 
 <template>
@@ -10,7 +15,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
             </h2>
         </template>
 
-        <div class="py-12">
+        <div class="py-12 space-y-4">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid sm:grid-cols-1 lg:grid-cols-4 gap-4">
                 <div class="bg-white dark:bg-gray-800 p-6 overflow-hidden shadow-xl sm:rounded-lg col-span-3 space-y-4">
                     <h3 class="text-3xl font-serif">Streamline Solutions Vehicle Records System</h3>
@@ -32,6 +37,28 @@ import AppLayout from '@/Layouts/AppLayout.vue';
                     </ul>
                 </div>
             </div>
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid sm:grid-cols-1 lg:grid-cols-4 gap-4">
+                <div class="flex flex-col items-between justify-between bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4 h-40">
+                    <h3 class="text-6xl font-serif">
+                        Vehicle Stats
+                    </h3>
+                </div>
+                <div v-for="vehicleCount in vehicleCounts" class="flex flex-col items-between justify-between bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4 h-40">
+                    <h3 class="text-2xl font-serif">
+                        {{ vehicleCount.label }}
+                    </h3>
+                    <p class="text-8xl text-end">{{ vehicleCount.count }}</p>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid sm:grid-cols-1 lg:grid-cols-4 gap-4">
+                <div v-for="typeCount in typeCounts" class="flex flex-col items-between justify-between bg-white dark:bg-gray-800 rounded-lg shadow-xl p-4 h-40">
+                    <h3 class="text-2xl font-serif">
+                        {{ typeCount.type }}
+                    </h3>
+                    <p class="text-8xl text-end">{{ typeCount.count }}</p>
+                </div>
+            </div>
+
         </div>
     </AppLayout>
 </template>

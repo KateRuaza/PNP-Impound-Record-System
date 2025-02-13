@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Middleware\EnsureIsAdmin;
 use Illuminate\Foundation\Application;
@@ -21,9 +22,7 @@ Route::middleware([
     'verified',
 ])->group(function () {
 
-    Route::get('/home', function () {
-        return Inertia::render('Home');
-    })->name('home');
+    Route::get('/home', [PageController::class, 'home'])->name('home');
 
     Route::group([
         'prefix' => 'admin',
