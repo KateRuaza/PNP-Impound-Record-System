@@ -48,15 +48,15 @@ const activeTab = ref('owner');
 
         <div class="py-12">
             <div class="max-w-5xl mx-auto px-6">
-                <div class="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-8">
+                <div class="bg-gray-100 dark:bg-indigo-950 dark:text-white rounded-lg p-8">
                     <div class="flex border-b mb-6">
                         <button class="w-1/2 py-3 text-center font-medium text-lg transition-all"
-                            :class="activeTab === 'owner' ? 'border-b-4 border-blue-500 text-blue-600' : 'text-gray-500'"
+                            :class="activeTab === 'owner' ? 'border-b-4 border-blue-500 text-blue-600 dark:text-white' : 'text-gray-500 dark:text-gray-400'"
                             @click="activeTab = 'owner'">
                             Owner Details
                         </button>
                         <button class="w-1/2 py-3 text-center font-medium text-lg transition-all"
-                            :class="activeTab === 'vehicle' ? 'border-b-4 border-blue-500 text-blue-600' : 'text-gray-500'"
+                            :class="activeTab === 'vehicle' ? 'border-b-4 border-blue-500 text-blue-600 dark:text-white' : 'text-gray-500 dark:text-gray-400'"
                             @click="activeTab = 'vehicle'">
                             Vehicle Details
                         </button>
@@ -90,7 +90,7 @@ const activeTab = ref('owner');
                                 </div>
                                 <div class="col-span-2">
                                     <InputLabel for="impound_reason" value="Impound Reason" />
-                                    <textarea id="impound_reason" v-model="form.impound_reason" class="w-full p-2 border rounded-md" rows="4" required></textarea>
+                                    <textarea id="impound_reason" v-model="form.impound_reason" class="w-full p-2 border dark:border-gray-700 rounded-md dark:bg-gray-900" rows="4" required></textarea>
                                     <InputError :message="form.errors.impound_reason" />
                                 </div>
                             </div>

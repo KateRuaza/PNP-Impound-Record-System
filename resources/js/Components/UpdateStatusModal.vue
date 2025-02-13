@@ -19,7 +19,7 @@ const emitAction = (status) => {
 
 <template>
     <div v-if="isOpen" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96">
+        <div class="bg-white dark:bg-indigo-950 p-6 rounded-lg shadow-lg w-96">
             <h2 class="text-xl font-semibold text-gray-800 dark:text-gray-200">Update Vehicle Status</h2>
             <p class="mt-2 text-gray-600 dark:text-gray-300">
                 Update status for <strong>{{ vehicle?.type }}</strong> (ID: {{ vehicle?.id }})
