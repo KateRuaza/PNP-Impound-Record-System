@@ -29,8 +29,9 @@ const submit = () => {
         onSuccess: () => {
             form.reset();
             alert('Vehicle Added!');
+            activeTab.value = 'owner';
         },
-        onError: (e) => {
+        onError: () => {
             alert('Failed to add vehicle');
         }
     });
@@ -42,98 +43,58 @@ const activeTab = ref('owner');
 <template>
     <AppLayout title="Impound Form">
         <template #header>
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                Impound Form
-            </h2>
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white">Impound Form</h2>
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xl sm:rounded-lg p-6">
-                    <div class="flex border-b mb-4">
-                        <button class="px-4 py-2 flex-1 text-center" :class="activeTab === 'owner' ? 'border-b-2 border-blue-500' : ''" @click="activeTab = 'owner'">Owner Details</button>
-                        <button class="px-4 py-2 flex-1 text-center" :class="activeTab === 'vehicle' ? 'border-b-2 border-blue-500' : ''" @click="activeTab = 'vehicle'">Vehicle Details</button>
+            <div class="max-w-5xl mx-auto px-6">
+                <div class="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-8">
+                    <div class="flex border-b mb-6">
+                        <button class="w-1/2 py-3 text-center font-medium text-lg transition-all"
+                            :class="activeTab === 'owner' ? 'border-b-4 border-blue-500 text-blue-600' : 'text-gray-500'"
+                            @click="activeTab = 'owner'">
+                            Owner Details
+                        </button>
+                        <button class="w-1/2 py-3 text-center font-medium text-lg transition-all"
+                            :class="activeTab === 'vehicle' ? 'border-b-4 border-blue-500 text-blue-600' : 'text-gray-500'"
+                            @click="activeTab = 'vehicle'">
+                            Vehicle Details
+                        </button>
                     </div>
+
                     <form @submit.prevent="submit">
                         <div v-if="activeTab === 'owner'">
-                            <div class="p-4">
-                                <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">Owner Details</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <InputLabel for="owner_first_name" value="First Name" />
-                                        <TextInput id="owner_first_name" class="w-full" v-model="form.owner_first_name" required />
-                                        <InputError :message="form.errors.owner_first_name" />
-                                    </div>
-                                    <div>
-                                        <InputLabel for="owner_middle_name" value="Middle Name" />
-                                        <TextInput id="owner_middle_name" class="w-full" v-model="form.owner_middle_name" />
-                                        <InputError :message="form.errors.owner_middle_name" />
-                                    </div>
-                                    <div>
-                                        <InputLabel for="owner_last_name" value="Last Name" />
-                                        <TextInput id="owner_last_name" class="w-full" v-model="form.owner_last_name" required />
-                                        <InputError :message="form.errors.owner_last_name" />
-                                    </div>
-                                    <div>
-                                        <InputLabel for="owner_nick_name" value="Nickname" />
-                                        <TextInput id="owner_nick_name" class="w-full" v-model="form.owner_nick_name" />
-                                        <InputError :message="form.errors.owner_nick_name" />
-                                    </div>
-                                    <div>
-                                        <InputLabel for="owner_age" value="Age" />
-                                        <TextInput id="owner_age" type="number" class="w-full" v-model="form.owner_age" required />
-                                        <InputError :message="form.errors.owner_age" />
-                                    </div>
-                                    <div>
-                                        <InputLabel for="owner_sex" value="Sex" />
-                                        <SelectInput id="owner_sex" class="w-full" v-model="form.owner_sex" :options="['Male', 'Female']" required />
-                                        <InputError :message="form.errors.owner_sex" />
-                                    </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div v-for="field in ['owner_first_name', 'owner_middle_name', 'owner_last_name', 'owner_nick_name', 'owner_age', 'owner_sex']" :key="field">
+                                    <InputLabel :for="field" :value="field.replace('_', ' ').toUpperCase()" />
+                                    <TextInput v-if="field !== 'owner_sex' && field !== 'owner_age'" :id="field" v-model="form[field]" class="w-full" required />
+                                    <TextInput v-else-if="field === 'owner_age'" :id="field" v-model="form[field]" class="w-full" type="number" required />
+                                    <SelectInput v-else :id="field" v-model="form[field]" :options="['Male', 'Female']" class="w-full" required />
+                                    <InputError :message="form.errors[field]" />
                                 </div>
                             </div>
                         </div>
+
                         <div v-if="activeTab === 'vehicle'">
-                            <div class="p-4">
-                                <h3 class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">Vehicle Details</h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div>
-                                        <InputLabel for="type" value="Vehicle Type" />
-                                        <SelectInput id="type" class="w-full" v-model="form.type" :options="['Car', 'Motorcycle', 'Truck', 'Van', 'Bus']" required />
-                                        <InputError :message="form.errors.type" />
-                                    </div>
-                                    <div>
-                                        <InputLabel for="color" value="Color" />
-                                        <TextInput id="color" class="w-full" v-model="form.color" required />
-                                        <InputError :message="form.errors.color" />
-                                    </div>
-                                    <div>
-                                        <InputLabel for="plate_number" value="Plate Number" />
-                                        <TextInput id="plate_number" class="w-full" v-model="form.plate_number" required />
-                                        <InputError :message="form.errors.plate_number" />
-                                    </div>
-                                    <div>
-                                        <InputLabel for="chasis_number" value="Chasis Number" />
-                                        <TextInput id="chasis_number" class="w-full" v-model="form.chasis_number" required />
-                                        <InputError :message="form.errors.chasis_number" />
-                                    </div>
-                                    <div>
-                                        <InputLabel for="impound_reason" value="Impound Reason" />
-                                        <TextInput id="impound_reason" class="w-full" v-model="form.impound_reason" required />
-                                        <InputError :message="form.errors.impound_reason" />
-                                    </div>
-                                    <div>
-                                        <InputLabel for="impound_date" value="Impound Date" />
-                                        <TextInput id="impound_date" type="date" class="w-full" v-model="form.impound_date" required />
-                                        <InputError :message="form.errors.impound_date" />
-                                    </div>
-                                    <div class="col-span-2">
-                                        <InputLabel for="image" value="Vehicle Image" />
-                                        <input id="image" type="file" @change="event => form.image = event.target.files[0]" class="mt-1 block w-full" />
-                                        <InputError :message="form.errors.image" />
-                                    </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div v-for="field in ['type', 'color', 'plate_number', 'chasis_number', 'impound_date']" :key="field">
+                                    <InputLabel :for="field" :value="field.replace('_', ' ').toUpperCase()" />
+                                    <TextInput v-if="field !== 'type'" :id="field" v-model="form[field]" class="w-full" required />
+                                    <SelectInput v-else :id="field" v-model="form[field]" :options="['Car', 'Motorcycle', 'Truck', 'Van', 'Bus']" class="w-full" required />
+                                    <InputError :message="form.errors[field]" />
+                                </div>
+                                <div class="col-span-2">
+                                    <InputLabel for="image" value="Vehicle Image" />
+                                    <input id="image" type="file" @change="event => form.image = event.target.files[0]" class="mt-1 block w-full" />
+                                    <InputError :message="form.errors.image" />
+                                </div>
+                                <div class="col-span-2">
+                                    <InputLabel for="impound_reason" value="Impound Reason" />
+                                    <textarea id="impound_reason" v-model="form.impound_reason" class="w-full p-2 border rounded-md" rows="4" required></textarea>
+                                    <InputError :message="form.errors.impound_reason" />
                                 </div>
                             </div>
-                            <div class="mt-6 text-end">
+                            <div class="mt-6 text-right">
                                 <PrimaryButton type="submit">Submit</PrimaryButton>
                             </div>
                         </div>
